@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/home/wyl/wyl/C++/webserver/build",
+  "command": "/usr/bin/c++  -I/home/wyl/wyl/C++/webserver/include -std=gnu++11 -o CMakeFiles/MyApp.dir/main.cpp.o -c /home/wyl/wyl/C++/webserver/main.cpp",
+  "file": "/home/wyl/wyl/C++/webserver/main.cpp",
+  "output": "CMakeFiles/MyApp.dir/main.cpp.o"
+},
+{
+  "directory": "/home/wyl/wyl/C++/webserver/build",
+  "command": "/usr/bin/c++  -I/home/wyl/wyl/C++/webserver/include -std=gnu++11 -o CMakeFiles/MyApp.dir/src/server.cpp.o -c /home/wyl/wyl/C++/webserver/src/server.cpp",
+  "file": "/home/wyl/wyl/C++/webserver/src/server.cpp",
+  "output": "CMakeFiles/MyApp.dir/src/server.cpp.o"
+}
+]

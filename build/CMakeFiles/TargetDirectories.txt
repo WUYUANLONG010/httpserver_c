@@ -1,0 +1,3 @@
+/home/wyl/wyl/C++/webserver/build/CMakeFiles/MyApp.dir
+/home/wyl/wyl/C++/webserver/build/CMakeFiles/edit_cache.dir
+/home/wyl/wyl/C++/webserver/build/CMakeFiles/rebuild_cache.dir
