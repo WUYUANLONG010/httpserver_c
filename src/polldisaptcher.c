@@ -16,6 +16,7 @@ static int poll_modify(stuct channel* ch,struct eventloop* evloop);
 static int poll_dispatch(struct eventloop* evloop,int timeout);
 static int poll_clear(struct eventloop* evloop);
 static int pollctl(stuct channel* ch,struct eventloop* evloop,int option);
+ 
 struct dispather poll_dispather={
     poll_init,
     poll_add,
@@ -41,7 +42,8 @@ static int pollctl(stuct channel* ch,struct eventloop* evloop,int option){
 }
 
 static void* poll_init(){
-    struct poll_data* data=(struct poll_data*)evloop->dpt_data;
+    // struct poll_data* data=(struct poll_data*)evloop->dpt_data;
+    struct poll_data* data=(struct poll_data*)malloc(sizeof(poll_data));
     data->maxfd=0;
     for(int i=0;i<MAX_POLL;i++){
         data->fd[i].fd=-1;
@@ -138,11 +140,11 @@ static int poll_dispatch(struct eventloop* evloop,int timeout){
 
         if(data->fds[i].revents&EPOLLIN){
             //读事件
-
+            event_activate(evloop,data->fds[i].fd,read_event);
         }
         if(evedata->fds[i].reventsnt&EPOLLOUT){
             //写事件
-
+            event_activate(evloop,data->fds[i].fd,write_event);
         }
 
     }

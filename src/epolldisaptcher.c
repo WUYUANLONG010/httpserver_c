@@ -93,11 +93,11 @@ static int epoll_dispatch(struct eventloop* evloop,int timeout){
         }
         if(event&EPOLLIN){
             //读事件
-
+            event_activate(evloop,fd,read_event);
         }
         if(event&EPOLLOUT){
             //写事件
-
+            event_activate(evloop,fd,write_event);
         }
 
     }
