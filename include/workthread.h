@@ -1,6 +1,6 @@
 #pragma once
 #include "pthread.h"
-
+#include "eventloop.h"
 
 struct work_thread{
     pthread_t threadID;

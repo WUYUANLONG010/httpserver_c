@@ -33,5 +33,12 @@ struct eventloop* take_work_eventloop(struct  TreadPool* pool){
     //主线程取子线程的eventloop
     assert(pool->is_start);
     assert(pool->mainloop->threadID!=pthread_self());
+    struct eventloop* evloop=pool->mainloop;
+    if(pool->thread_num>0){
+        evloop=pool->work_threads[pool->index].evloop;
+        pool->index=++pool->index%pool->thread_num;
+ 
+    }
+    return evloop;
     
 }
