@@ -1,6 +1,7 @@
 #include "channelmap.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 struct channel_map* channel_map_init(int size){
     struct channel_map* ch_map=(struct channel_map*)malloc(sizeof(struct channel_map));
     ch_map->size=size;
@@ -27,7 +28,7 @@ bool make_map_rom(struct channel_map* map, int new_size,int unitsize){
     if(new_size>map->size){
         int cur_size=map->size;
         while(cur_size<new_size){
-            cursize*=2;
+            cur_size*=2;
         }
         //扩容realloc
 

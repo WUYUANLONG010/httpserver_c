@@ -1,4 +1,4 @@
-#progma once
+#pragma once
 #include "dispatch.h"
 #include "stdbool.h"
 #include "channelmap.h"

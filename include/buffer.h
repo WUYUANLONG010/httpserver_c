@@ -1,13 +1,15 @@
+
 #pragma once
 #include "eventloop.h"
+#include <stddef.h>
+
 struct Buffer{
     //指向内存的指针
     char* data;
-
     int capacity;
     int readpos;
     int writepos;
-}
+};
 struct Buffer* buffer_init(int size);
 void  buffer_destroy(struct Buffer* buff);
 void buffer_write(struct Buffer* buff);

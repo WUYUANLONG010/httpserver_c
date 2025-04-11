@@ -1,5 +1,8 @@
 #ifndef SERVER_H 
 #define SERVER_H 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #define DEBUG(fmt,...) printf("[%s:func:%s() line:%d] " fmt "\t\n", __FILE__,__func__,__LINE__, ##__VA_ARGS__)
 //初始化监听套接字
 int init_listen_fd(unsigned int port);

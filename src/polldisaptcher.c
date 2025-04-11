@@ -17,7 +17,7 @@ static int poll_dispatch(struct eventloop* evloop,int timeout);
 static int poll_clear(struct eventloop* evloop);
 static int pollctl(stuct channel* ch,struct eventloop* evloop,int option);
  
-struct dispather poll_dispather={
+struct disaptcher poll_dispather={
     poll_init,
     poll_add,
     poll_remove,

@@ -15,7 +15,7 @@ static int select_remove(stuct channel* ch,struct eventloop* evloop);
 static int select_modify(stuct channel* ch,struct eventloop* evloop);
 static int select_dispatch(struct eventloop* evloop,int timeout);
 static int select_clear(struct eventloop* evloop);
-struct dispather select_dispather={
+struct disaptcher select_dispather={
     select_init,
     select_add,
     select_remove,
