@@ -3,10 +3,10 @@
 #include "stdbool.h"
 #include "channelmap.h"
 #include "pthread.h"
-extern struct dispather epoll_dispather;
+extern struct Dispather epoll_dispather;
 
-extern struct dispather poll_dispather;
-extern struct dispather select_dispather;
+extern struct Dispather poll_dispather;
+extern struct Dispather select_dispather;
 //定义任务队列的节点
 enum elem_type{ADD,DELETE,MODIFY};
 struct channel_element{

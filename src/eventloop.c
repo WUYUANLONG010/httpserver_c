@@ -2,6 +2,10 @@
 #include "assert.h"
 #include <sys/socket.h>
 #include "dispatch.h"
+#include <stdlib.h>
+#include "channel.h"
+#include "channelmap.h"
+#include "string.h"
 struct eventloop* eventloop_init(){
     return eventloop_ex_init(NULL);
 }
@@ -89,7 +93,7 @@ int event_add_task(struct eventloop* evloop,struct channel* ch,int type){
             2)，添加新的fd，添加任务节点的操作是由主线程
         2.不能让主线程处理任务队列，需要由当前的子线程取处理
     */
-   if(evLoop->threadID == pthread_self()){
+   if(evloop->threadID == pthread_self()){
     //当前子线程给自己添加文件描述符
         eventloop_process_task(evloop);
    }else{
@@ -170,7 +174,7 @@ int eventloop_mod(struct eventloop* evloop,struct channel* ch){
 }
 
 int destroychannel(struct eventloop* evloop,struct channel* ch){
-    evloop->ch_map->list[channel-fd]=NULL;//channel map 删除ch
+    evloop->ch_map->list[channel->fd]=NULL;//channel map 删除ch
     //关闭fd
     close(channel->fd);
     //释放channel的地址

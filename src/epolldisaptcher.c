@@ -4,10 +4,10 @@
 #include "channel.h"
 
 #define MAX 520
-// struct EpollData{
-//     int epfd;
-//     struct epoll_event* events;
-// };
+struct EpollData{
+    int epfd;
+    struct epoll_event* events;
+};
 //init 初始化epoll （epoll event） poll:pollfd select:fdset其中一个,返回值是epoll poll select中的一个
 static void* epoll_init();
 static int epoll_add(struct channel* ch,struct eventloop* evloop);
@@ -17,7 +17,7 @@ static int epoll_dispatch(struct eventloop* evloop,int timeout);
 static int epoll_clear(struct eventloop* evloop);
 static int epollctl(struct channel* ch,struct eventloop* evloop,int option);
 // epoll_dispather
-struct dispatcher epoll_dispather={
+struct Dispather epoll_dispather={
     epoll_init,
     epoll_add,
     epoll_remove,
@@ -25,6 +25,7 @@ struct dispatcher epoll_dispather={
     epoll_dispatch,
     epoll_clear
 };
+
 static int epollctl(struct channel* ch,struct eventloop* evloop,int option){
     struct EpollData* data=(struct EpollData*)evloop->dpt_data;
     struct epoll_event ev;
@@ -42,18 +43,18 @@ static int epollctl(struct channel* ch,struct eventloop* evloop,int option){
 }
 
 static void* epoll_init(){
-    struct EpollData* data=(struct EpollData*)malloc(sizeof(EpollData));
+    struct EpollData* data=(struct EpollData*)malloc(sizeof(struct EpollData));
     data->epfd=epoll_create(10);
     if(data->epfd==-1){
         DEBUG("dispather_epoll create error");
-        return -1;
+        exit(0);
     }else{
         DEBUG("dispather_epoll create success");
     }
     data->events=(struct epoll_event* )calloc(MAX,sizeof(struct epoll_event));
     if(data->events==NULL){
         DEBUG("dispather_epoLL_EVENT create error");
-        return -1;
+        exit(0);
     }else{
         DEBUG("dispather_epoLL_EVENT  create success");
     }
@@ -92,6 +93,7 @@ static int epoll_dispatch(struct eventloop* evloop,int timeout){
             //epoll_remove(,evloop);
             continue;
         }
+    
         if(event&EPOLLIN){
             //读事件
             event_activate(evloop,fd,read_event);
