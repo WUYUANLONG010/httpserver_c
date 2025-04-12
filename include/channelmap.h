@@ -1,10 +1,10 @@
 #pragma once
 #include "channel.h"
 #include <stdbool.h>
-struct channel_map{
+struct ChannelMap{
     int size;
-    struct channel** list;
+    struct Channel** list;
 };
-struct channel_map* channel_map_init(int size);
-void channel_map_clean(struct channel_map* map);
-bool make_map_rom(struct channel_map* map, int new_size,int unitsize);
+struct ChannelMap* channel_map_init(int size);
+void channel_map_clean(struct ChannelMap* map);
+bool make_map_rom(struct ChannelMap* map, int new_size,int unitsize);

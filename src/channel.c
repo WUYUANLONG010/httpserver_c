@@ -1,8 +1,8 @@
 #include "channel.h"
 #include <stdlib.h>
 
-struct channel* channel_init(int fd,int event,handleFunc read,handleFunc write,void* args){
-    struct channel* channel=(struct channel*)malloc(sizeof(struct channel));
+struct Channel* channel_init(int fd,int event,handleFunc read,handleFunc write,void* args){
+    struct Channel* channel=(struct Channel*)malloc(sizeof(struct Channel));
     channel->arg=args;
     channel->fd=fd;
     channel->event=event;
@@ -12,13 +12,13 @@ struct channel* channel_init(int fd,int event,handleFunc read,handleFunc write,v
     return channel; 
     
 }
-void write_event_enable(struct channel* channel,bool flag){
+void write_event_enable(struct Channel* channel,bool flag){
     if (flag){
         channel->event|=write_event;
     }else{
         channel->event=channel->event&~write_event;
     }
 }
-bool is_write_event_enable(struct channel* channel){
+bool is_write_event_enable(struct Channel* channel){
     return channel->event&write_event;
 }

@@ -5,25 +5,28 @@
 #include <stdlib.h>
 #include "channel.h"
 #include "channelmap.h"
+#include "server.h"
 #include "string.h"
-struct eventloop* eventloop_init(){
+#include <fcntl.h> // for open
+#include <unistd.h> // for close
+struct EventLoop* eventloop_init(){
     return eventloop_ex_init(NULL);
 }
 int read_local_message(void* arg){
-    struct eventloop* evloop = (struct eventloop*)arg;
+    struct EventLoop* evloop = (struct EventLoop*)arg;
     char buf[256];
     read(evloop->socket_pair[1],buf,sizeof(buf));
     return 0;
 }
-struct eventloop* eventloop_ex_init(const char* theadName){
+struct EventLoop* eventloop_ex_init(const char* theadName){
     //创建内存
-    struct eventloop* evloop = (struct eventloop*)malloc(sizeof(struct eventloop));
+    struct EventLoop* evloop = (struct EventLoop*)malloc(sizeof(struct EventLoop));
     evloop->is_quit=false;
-    evloop->thead_ID=pthread_self();
+    evloop->thread_ID=pthread_self();
     pthread_mutex_init(&evloop->mutex,NULL);
-    strcopy(evloop->theadName,theadName==NULL?"main":threadName)
-    evloop->dispatcher=&epoll_dispather;
-    evloop->dpt_data=evloop->disaptcher->init();//epoll dispather初始化函数
+    strcpy(evloop->threadName,theadName==NULL?"main":theadName);
+    evloop->dpt=&epoll_dispather;
+    evloop->dpt_data=evloop->dpt->init();//epoll dispather初始化函数
     evloop->head=NULL;
     evloop->tail=NULL;
     int ret = socketpair(AF_UNIX,SOCK_STREAM,0,evloop->socket_pair);
@@ -31,51 +34,51 @@ struct eventloop* eventloop_ex_init(const char* theadName){
     if(ret ==-1){
         DEBUG("socket pair create fail");
     }
-    struct channel* ch=channel_init(evloop->socket_pair[1],read_event,read_local_message,NULL,evloop);
+    struct Channel* ch=channel_init(evloop->socket_pair[1],read_event,read_local_message,NULL,evloop);
     event_add_task(evloop,ch,ADD);
     return evloop;
 }
 
-int  eventloop_run(struct eventloop* evloop){
+int  eventloop_run(struct EventLoop* evloop){
     assert(evloop!=NULL);
     //启动epoll模型
     //比较线程ID是否正常
-    if(evloop->threadID!=pthread_self()){
+    if(evloop->thread_ID!=pthread_self()){
         return -1;
     }
-    struct disaptcher* dispather=evloop->dpt;
-    while(!ev->is_quit){
+    struct Dispather* dispather=evloop->dpt;
+    while(!evloop->is_quit){
         dispather->dispatch(evloop,2);//超时时长2s
         eventloop_process_task(evloop);
     }
     return 0;
 }
 
-int event_activate(struct eventloop* evloop,int fd,int event){
+int event_activate(struct EventLoop* evloop,int fd,int event){
     if(fd<0|evloop==NULL){
         return -1;
     }
     //取出channel  寻找对应的处理方法
-    struct channel* ch=evloop->channelmap->list[fd];
-    assert(fd==channel->fd);
-    if(event& read_event&& channel->read_call_back){
-        channel->read_call_back(channel->arg);
+    struct Channel* ch=evloop->ch_map->list[fd];
+    assert(fd==ch->fd);
+    if(event& read_event&& ch->read_call_back){
+        ch->read_call_back(ch->arg);
     }
-    if(event&write_event && channel->write_call_back){
-        channel->write_call_back(channel->arg);
+    if(event&write_event && ch->write_call_back){
+        ch->write_call_back(ch->arg);
     }
     return 0;
 }
-void task_wake_up(struct eventloop* evloop){
+void task_wake_up(struct EventLoop* evloop){
     const char* msg="1";
     write(evloop->socket_pair[0],msg,strlen(msg));
 }
-int event_add_task(struct eventloop* evloop,struct channel* ch,int type){
+int event_add_task(struct EventLoop* evloop,struct Channel* ch,int type){
     //任务队列加锁，防止子线程访问
     pthread_mutex_lock(&evloop->mutex);
     //创建新的节点
-    struct channel_element* node=(struct channel_element*)malloc(sizeof(struct channel_element));
-    node->channel=ch;
+    struct ChannelElement* node=(struct ChannelElement*)malloc(sizeof(struct ChannelElement));
+    node->ch=ch;
     node->type=type;
     node->next=NULL;
     if(evloop->head==NULL){
@@ -93,7 +96,7 @@ int event_add_task(struct eventloop* evloop,struct channel* ch,int type){
             2)，添加新的fd，添加任务节点的操作是由主线程
         2.不能让主线程处理任务队列，需要由当前的子线程取处理
     */
-   if(evloop->threadID == pthread_self()){
+   if(evloop->thread_ID == pthread_self()){
     //当前子线程给自己添加文件描述符
         eventloop_process_task(evloop);
    }else{
@@ -111,12 +114,12 @@ int event_add_task(struct eventloop* evloop,struct channel* ch,int type){
     return 0;
 }
 //任务队列处理任务
-int eventloop_process_task(struct eventloop* evloop){
+int eventloop_process_task(struct EventLoop* evloop){
     pthread_mutex_lock(&evloop->mutex);
     //取出头节点
-    struct channel_element* head =evloop->head;
+    struct ChannelElement* head =evloop->head;
     while(head!=NULL){
-        struct channel* ch=head->channel;
+        struct Channel* ch=head->ch;
         if(head->type==ADD){
             //添加节点
             eventloop_add(evloop,ch);
@@ -127,7 +130,7 @@ int eventloop_process_task(struct eventloop* evloop){
             //修改
             eventloop_mod(evloop,ch);
         }
-        struct channel_element* tmp=head;
+        struct ChannelElement* tmp=head;
         head=head->next;
         free(tmp);
     }
@@ -137,47 +140,47 @@ int eventloop_process_task(struct eventloop* evloop){
     return 0;
 }
 
-int eventloop_add(struct eventloop* evloop,struct channel* ch){
-    int fd = channel->fd;
-    struct channelmap* ch_map=evloop->channelmap;
+int eventloop_add(struct EventLoop* evloop,struct Channel* ch){
+    int fd = ch->fd;
+    struct ChannelMap* ch_map=evloop->ch_map;
     if(fd>=ch_map->size){
-        if(!makeMapRoom(channelmap,fd,sizeof(struct channel*))){
+        if(!make_map_rom(ch_map,fd,sizeof(struct Channel*))){
             return -1;
         }
     }
     //找到fd对应的数组元素位置并存储
     if(ch_map->list[fd]==NULL){
         ch_map->list[fd]=ch;
-        evloop->dispatch->add(ch,evloop);
+        evloop->dpt->add(ch,evloop);
     }
     return 0;
 }
-int eventloop_del(struct eventloop* evloop,struct channel* ch){
-    int fd = channel->fd;
-    struct channelmap* ch_map=evloop->channelmap;
+int eventloop_del(struct EventLoop* evloop,struct Channel* ch){
+    int fd = ch->fd;
+    struct ChannelMap* ch_map=evloop->ch_map;
     if(fd>=ch_map->size){//fd不在dispatch检测集合里面
             return -1;
     }
     //找到fd对应的数组元素位置并存储
-    int ret = evloop->dispatcher->remove(ch,evloop);
+    int ret = evloop->dpt->remove(ch,evloop);
     return ret;
 }
-int eventloop_mod(struct eventloop* evloop,struct channel* ch){
-    int fd = channel->fd;
-    struct channelmap* ch_map=evloop->channelmap;
+int eventloop_mod(struct EventLoop* evloop,struct Channel* ch){
+    int fd = ch->fd;
+    struct ChannelMap* ch_map=evloop->ch_map;
     if(fd>=ch_map->size){//fd不在dispatch检测集合里面
             return -1;
     }
     //找到fd对应的数组元素位置并存储
-    int ret = evloop->dispatcher->modify(ch,evloop);
+    int ret = evloop->dpt->modify(ch,evloop);
     return ret;
 }
 
-int destroychannel(struct eventloop* evloop,struct channel* ch){
-    evloop->ch_map->list[channel->fd]=NULL;//channel map 删除ch
+int destroychannel(struct EventLoop* evloop,struct Channel* ch){
+    evloop->ch_map->list[ch->fd]=NULL;//channel map 删除ch
     //关闭fd
-    close(channel->fd);
+    close(ch->fd);
     //释放channel的地址
-    free(channel);
+    free(ch);
     return 0;
 }

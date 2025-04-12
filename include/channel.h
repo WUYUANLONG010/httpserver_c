@@ -2,7 +2,7 @@
 #define CHANNEL_H
 #include <stdbool.h>
 typedef int(*handleFunc)(void * arg); 
-struct channel{
+struct Channel{
     //文件描述符
     int fd;
     //事件
@@ -19,8 +19,8 @@ enum fdevent
     read_event=0x02,
     write_event=0x04
 };
-struct channel* channel_init(int fd,int event,handleFunc read,handleFunc write,void* args);
+struct Channel* channel_init(int fd,int event,handleFunc read,handleFunc write,void* args);
 //修改fd的写事件
-void write_event_enable(struct channel* channel,bool flag);
-bool is_write_event_enable(struct channel* channel);
+void write_event_enable(struct Channel* channel,bool flag);
+bool is_write_event_enable(struct Channel* channel);
 #endif

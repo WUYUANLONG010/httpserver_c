@@ -2,13 +2,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-struct channel_map* channel_map_init(int size){
-    struct channel_map* ch_map=(struct channel_map*)malloc(sizeof(struct channel_map));
+struct ChannelMap* channel_map_init(int size){
+    struct ChannelMap* ch_map=(struct ChannelMap*)malloc(sizeof(struct ChannelMap));
     ch_map->size=size;
-    ch_map->list=(struct channel_map**)malloc(size*sizeof(struct channel_map*));//为二级指针开辟存储区域
+    ch_map->list=(struct ChannelMap**)malloc(size*sizeof(struct ChannelMap*));//为二级指针开辟存储区域
     return ch_map;
 }
-void channel_map_clean(struct channel_map* map){
+void channel_map_clean(struct ChannelMap* map){
     //清空结构体
     /*
     1.清空数组指针对应的堆内存
@@ -23,7 +23,7 @@ void channel_map_clean(struct channel_map* map){
    map->list=NULL;
    map->size=0;
 }
-bool make_map_rom(struct channel_map* map, int new_size,int unitsize){
+bool make_map_rom(struct ChannelMap* map, int new_size,int unitsize){
     //数组扩容
     if(new_size>map->size){
         int cur_size=map->size;

@@ -4,14 +4,14 @@
 struct Listener{
     int listen_fd;
     unsigned short port;
-}
+};
 struct TcpServer{
     int threadnum;
     struct eventloop* mainloop;
     struct TreadPool* thread_pool;
     struct Listener* listen;
 
-}
+};
 //初始化
 struct TcpServer* TcpServer_init(unsigned short port,int threadnum);
 //初始化监听

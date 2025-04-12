@@ -1,5 +1,6 @@
 #include "dispatch.h"
 #include <sys/epoll.h>
+#include "eventloop.h"
 #include "server.h"
 #include "channel.h"
 
@@ -10,12 +11,12 @@ struct EpollData{
 };
 //init 初始化epoll （epoll event） poll:pollfd select:fdset其中一个,返回值是epoll poll select中的一个
 static void* epoll_init();
-static int epoll_add(struct channel* ch,struct eventloop* evloop);
-static int epoll_remove(struct channel* ch,struct eventloop* evloop);
-static int epoll_modify(struct channel* ch,struct eventloop* evloop);
-static int epoll_dispatch(struct eventloop* evloop,int timeout);
-static int epoll_clear(struct eventloop* evloop);
-static int epollctl(struct channel* ch,struct eventloop* evloop,int option);
+static int epoll_add(struct Channel* ch,struct EventLoop* evloop);
+static int epoll_remove(struct Channel* ch,struct EventLoop* evloop);
+static int epoll_modify(struct Channel* ch,struct EventLoop* evloop);
+static int epoll_dispatch(struct EventLoop* evloop,int timeout);
+static int epoll_clear(struct EventLoop* evloop);
+static int epollctl(struct Channel* ch,struct EventLoop* evloop,int option);
 // epoll_dispather
 struct Dispather epoll_dispather={
     epoll_init,
@@ -26,7 +27,7 @@ struct Dispather epoll_dispather={
     epoll_clear
 };
 
-static int epollctl(struct channel* ch,struct eventloop* evloop,int option){
+static int epollctl(struct Channel* ch,struct EventLoop* evloop,int option){
     struct EpollData* data=(struct EpollData*)evloop->dpt_data;
     struct epoll_event ev;
     ev.data.fd=ch->fd;
@@ -60,14 +61,14 @@ static void* epoll_init(){
     }
     return data;
 }
-static int epoll_add(struct channel* ch,struct eventloop* evloop){
+static int epoll_add(struct Channel* ch,struct EventLoop* evloop){
     int ret=epollctl(ch,evloop,EPOLL_CTL_ADD);
     if(ret==-1){
         DEBUG("epoll_add fail!");
     }
     return ret;
 }
-static int epoll_remove(struct channel* ch,struct eventloop* evloop){
+static int epoll_remove(struct Channel* ch,struct EventLoop* evloop){
     int ret=epollctl(ch,evloop,EPOLL_CTL_DEL);
     if(ret==-1){
         DEBUG("epoll_add fail!");
@@ -75,14 +76,14 @@ static int epoll_remove(struct channel* ch,struct eventloop* evloop){
     return ret;
     return ret;
 }
-static int epoll_modify(struct channel* ch,struct eventloop* evloop){
+static int epoll_modify(struct Channel* ch,struct EventLoop* evloop){
     int ret=epollctl(ch,evloop,EPOLL_CTL_MOD);
     if(ret==-1){
         DEBUG("epoll_add fail!");
     }
     return ret;
 }
-static int epoll_dispatch(struct eventloop* evloop,int timeout){
+static int epoll_dispatch(struct EventLoop* evloop,int timeout){
     struct EpollData* data=(struct EpollData*)evloop->dpt_data;
     int count=epoll_wait(data->epfd,data->events,MAX,timeout*1000);
     for(int i=0;i<count;i++){
@@ -107,7 +108,7 @@ static int epoll_dispatch(struct eventloop* evloop,int timeout){
     return 0;
     
 }
-static int epoll_clear(struct eventloop* evloop){
+static int epoll_clear(struct EventLoop* evloop){
     struct EpollData* data=(struct EpollData*)evloop->dpt_data;
     free(data->events);
     close(data->epfd);

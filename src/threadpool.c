@@ -1,21 +1,22 @@
+#include "eventloop.h"
 #include "theadpool.h"
 #include "workthread.h"
 #include <assert.h>
 #include <stdlib.h>
 
-struct  TreadPool* thread_pool_init(struct eventloop* mainloop, int count){
+struct  TreadPool* thread_pool_init(struct EventLoop* mainloop, int count){
     struct  TreadPool* pool=(struct  TreadPool*)malloc(sizeof(struct  TreadPool));
     pool->index=0;
     pool->is_start=false;
     pool->mainloop=mainloop;
     pool->thread_num=count;
-    pool->work_threads=(struct work_thread*)malloc(sizeof(struct work_thread)*count);
+    pool->work_threads=(struct work_thread*)malloc(sizeof(struct WorkThread) * count);
     return pool;
 }
 
 void thread_pool_run(struct  TreadPool* pool){
     assert(pool&&!pool->is_start);
-    if(pool->mainloop->threadID!=pthread_self())//只能是主线程启动线程池
+    if(pool->mainloop->thread_ID!=pthread_self())//只能是主线程启动线程池
     {
         exit(0);
     }
@@ -29,11 +30,11 @@ void thread_pool_run(struct  TreadPool* pool){
     }
 }
 
-struct eventloop* take_work_eventloop(struct  TreadPool* pool){
+struct EventLoop* take_work_eventloop(struct  TreadPool* pool){
     //主线程取子线程的eventloop
     assert(pool->is_start);
-    assert(pool->mainloop->threadID!=pthread_self());
-    struct eventloop* evloop=pool->mainloop;
+    assert(pool->mainloop->thread_ID!=pthread_self());
+    struct EventLoop* evloop=pool->mainloop;
     if(pool->thread_num>0){
         evloop=pool->work_threads[pool->index].evloop;
         pool->index=++pool->index%pool->thread_num;
