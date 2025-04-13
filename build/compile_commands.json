@@ -7,8 +7,80 @@
 },
 {
   "directory": "/home/wyl/wyl/C++/webserver/build",
+  "command": "/usr/bin/cc  -I/home/wyl/wyl/C++/webserver/include  -o CMakeFiles/MyApp.dir/src/buffer.c.o -c /home/wyl/wyl/C++/webserver/src/buffer.c",
+  "file": "/home/wyl/wyl/C++/webserver/src/buffer.c",
+  "output": "CMakeFiles/MyApp.dir/src/buffer.c.o"
+},
+{
+  "directory": "/home/wyl/wyl/C++/webserver/build",
+  "command": "/usr/bin/cc  -I/home/wyl/wyl/C++/webserver/include  -o CMakeFiles/MyApp.dir/src/channel.c.o -c /home/wyl/wyl/C++/webserver/src/channel.c",
+  "file": "/home/wyl/wyl/C++/webserver/src/channel.c",
+  "output": "CMakeFiles/MyApp.dir/src/channel.c.o"
+},
+{
+  "directory": "/home/wyl/wyl/C++/webserver/build",
+  "command": "/usr/bin/cc  -I/home/wyl/wyl/C++/webserver/include  -o CMakeFiles/MyApp.dir/src/channelmap.c.o -c /home/wyl/wyl/C++/webserver/src/channelmap.c",
+  "file": "/home/wyl/wyl/C++/webserver/src/channelmap.c",
+  "output": "CMakeFiles/MyApp.dir/src/channelmap.c.o"
+},
+{
+  "directory": "/home/wyl/wyl/C++/webserver/build",
+  "command": "/usr/bin/cc  -I/home/wyl/wyl/C++/webserver/include  -o CMakeFiles/MyApp.dir/src/epolldisaptcher.c.o -c /home/wyl/wyl/C++/webserver/src/epolldisaptcher.c",
+  "file": "/home/wyl/wyl/C++/webserver/src/epolldisaptcher.c",
+  "output": "CMakeFiles/MyApp.dir/src/epolldisaptcher.c.o"
+},
+{
+  "directory": "/home/wyl/wyl/C++/webserver/build",
+  "command": "/usr/bin/cc  -I/home/wyl/wyl/C++/webserver/include  -o CMakeFiles/MyApp.dir/src/eventloop.c.o -c /home/wyl/wyl/C++/webserver/src/eventloop.c",
+  "file": "/home/wyl/wyl/C++/webserver/src/eventloop.c",
+  "output": "CMakeFiles/MyApp.dir/src/eventloop.c.o"
+},
+{
+  "directory": "/home/wyl/wyl/C++/webserver/build",
+  "command": "/usr/bin/cc  -I/home/wyl/wyl/C++/webserver/include  -o CMakeFiles/MyApp.dir/src/httprequest.c.o -c /home/wyl/wyl/C++/webserver/src/httprequest.c",
+  "file": "/home/wyl/wyl/C++/webserver/src/httprequest.c",
+  "output": "CMakeFiles/MyApp.dir/src/httprequest.c.o"
+},
+{
+  "directory": "/home/wyl/wyl/C++/webserver/build",
+  "command": "/usr/bin/cc  -I/home/wyl/wyl/C++/webserver/include  -o CMakeFiles/MyApp.dir/src/polldisaptcher.c.o -c /home/wyl/wyl/C++/webserver/src/polldisaptcher.c",
+  "file": "/home/wyl/wyl/C++/webserver/src/polldisaptcher.c",
+  "output": "CMakeFiles/MyApp.dir/src/polldisaptcher.c.o"
+},
+{
+  "directory": "/home/wyl/wyl/C++/webserver/build",
+  "command": "/usr/bin/cc  -I/home/wyl/wyl/C++/webserver/include  -o CMakeFiles/MyApp.dir/src/selectdisaptcher.c.o -c /home/wyl/wyl/C++/webserver/src/selectdisaptcher.c",
+  "file": "/home/wyl/wyl/C++/webserver/src/selectdisaptcher.c",
+  "output": "CMakeFiles/MyApp.dir/src/selectdisaptcher.c.o"
+},
+{
+  "directory": "/home/wyl/wyl/C++/webserver/build",
   "command": "/usr/bin/c++  -I/home/wyl/wyl/C++/webserver/include -std=gnu++11 -o CMakeFiles/MyApp.dir/src/server.cpp.o -c /home/wyl/wyl/C++/webserver/src/server.cpp",
   "file": "/home/wyl/wyl/C++/webserver/src/server.cpp",
   "output": "CMakeFiles/MyApp.dir/src/server.cpp.o"
+},
+{
+  "directory": "/home/wyl/wyl/C++/webserver/build",
+  "command": "/usr/bin/cc  -I/home/wyl/wyl/C++/webserver/include  -o CMakeFiles/MyApp.dir/src/tcpconnection.c.o -c /home/wyl/wyl/C++/webserver/src/tcpconnection.c",
+  "file": "/home/wyl/wyl/C++/webserver/src/tcpconnection.c",
+  "output": "CMakeFiles/MyApp.dir/src/tcpconnection.c.o"
+},
+{
+  "directory": "/home/wyl/wyl/C++/webserver/build",
+  "command": "/usr/bin/cc  -I/home/wyl/wyl/C++/webserver/include  -o CMakeFiles/MyApp.dir/src/tcpserver.c.o -c /home/wyl/wyl/C++/webserver/src/tcpserver.c",
+  "file": "/home/wyl/wyl/C++/webserver/src/tcpserver.c",
+  "output": "CMakeFiles/MyApp.dir/src/tcpserver.c.o"
+},
+{
+  "directory": "/home/wyl/wyl/C++/webserver/build",
+  "command": "/usr/bin/cc  -I/home/wyl/wyl/C++/webserver/include  -o CMakeFiles/MyApp.dir/src/threadpool.c.o -c /home/wyl/wyl/C++/webserver/src/threadpool.c",
+  "file": "/home/wyl/wyl/C++/webserver/src/threadpool.c",
+  "output": "CMakeFiles/MyApp.dir/src/threadpool.c.o"
+},
+{
+  "directory": "/home/wyl/wyl/C++/webserver/build",
+  "command": "/usr/bin/cc  -I/home/wyl/wyl/C++/webserver/include  -o CMakeFiles/MyApp.dir/src/workthread.c.o -c /home/wyl/wyl/C++/webserver/src/workthread.c",
+  "file": "/home/wyl/wyl/C++/webserver/src/workthread.c",
+  "output": "CMakeFiles/MyApp.dir/src/workthread.c.o"
 }
 ]

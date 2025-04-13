@@ -153,6 +153,198 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/buffer.o: src/buffer.c.o
+.PHONY : src/buffer.o
+
+# target to build an object file
+src/buffer.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/buffer.c.o
+.PHONY : src/buffer.c.o
+
+src/buffer.i: src/buffer.c.i
+.PHONY : src/buffer.i
+
+# target to preprocess a source file
+src/buffer.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/buffer.c.i
+.PHONY : src/buffer.c.i
+
+src/buffer.s: src/buffer.c.s
+.PHONY : src/buffer.s
+
+# target to generate assembly for a file
+src/buffer.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/buffer.c.s
+.PHONY : src/buffer.c.s
+
+src/channel.o: src/channel.c.o
+.PHONY : src/channel.o
+
+# target to build an object file
+src/channel.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/channel.c.o
+.PHONY : src/channel.c.o
+
+src/channel.i: src/channel.c.i
+.PHONY : src/channel.i
+
+# target to preprocess a source file
+src/channel.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/channel.c.i
+.PHONY : src/channel.c.i
+
+src/channel.s: src/channel.c.s
+.PHONY : src/channel.s
+
+# target to generate assembly for a file
+src/channel.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/channel.c.s
+.PHONY : src/channel.c.s
+
+src/channelmap.o: src/channelmap.c.o
+.PHONY : src/channelmap.o
+
+# target to build an object file
+src/channelmap.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/channelmap.c.o
+.PHONY : src/channelmap.c.o
+
+src/channelmap.i: src/channelmap.c.i
+.PHONY : src/channelmap.i
+
+# target to preprocess a source file
+src/channelmap.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/channelmap.c.i
+.PHONY : src/channelmap.c.i
+
+src/channelmap.s: src/channelmap.c.s
+.PHONY : src/channelmap.s
+
+# target to generate assembly for a file
+src/channelmap.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/channelmap.c.s
+.PHONY : src/channelmap.c.s
+
+src/epolldisaptcher.o: src/epolldisaptcher.c.o
+.PHONY : src/epolldisaptcher.o
+
+# target to build an object file
+src/epolldisaptcher.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/epolldisaptcher.c.o
+.PHONY : src/epolldisaptcher.c.o
+
+src/epolldisaptcher.i: src/epolldisaptcher.c.i
+.PHONY : src/epolldisaptcher.i
+
+# target to preprocess a source file
+src/epolldisaptcher.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/epolldisaptcher.c.i
+.PHONY : src/epolldisaptcher.c.i
+
+src/epolldisaptcher.s: src/epolldisaptcher.c.s
+.PHONY : src/epolldisaptcher.s
+
+# target to generate assembly for a file
+src/epolldisaptcher.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/epolldisaptcher.c.s
+.PHONY : src/epolldisaptcher.c.s
+
+src/eventloop.o: src/eventloop.c.o
+.PHONY : src/eventloop.o
+
+# target to build an object file
+src/eventloop.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/eventloop.c.o
+.PHONY : src/eventloop.c.o
+
+src/eventloop.i: src/eventloop.c.i
+.PHONY : src/eventloop.i
+
+# target to preprocess a source file
+src/eventloop.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/eventloop.c.i
+.PHONY : src/eventloop.c.i
+
+src/eventloop.s: src/eventloop.c.s
+.PHONY : src/eventloop.s
+
+# target to generate assembly for a file
+src/eventloop.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/eventloop.c.s
+.PHONY : src/eventloop.c.s
+
+src/httprequest.o: src/httprequest.c.o
+.PHONY : src/httprequest.o
+
+# target to build an object file
+src/httprequest.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/httprequest.c.o
+.PHONY : src/httprequest.c.o
+
+src/httprequest.i: src/httprequest.c.i
+.PHONY : src/httprequest.i
+
+# target to preprocess a source file
+src/httprequest.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/httprequest.c.i
+.PHONY : src/httprequest.c.i
+
+src/httprequest.s: src/httprequest.c.s
+.PHONY : src/httprequest.s
+
+# target to generate assembly for a file
+src/httprequest.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/httprequest.c.s
+.PHONY : src/httprequest.c.s
+
+src/polldisaptcher.o: src/polldisaptcher.c.o
+.PHONY : src/polldisaptcher.o
+
+# target to build an object file
+src/polldisaptcher.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/polldisaptcher.c.o
+.PHONY : src/polldisaptcher.c.o
+
+src/polldisaptcher.i: src/polldisaptcher.c.i
+.PHONY : src/polldisaptcher.i
+
+# target to preprocess a source file
+src/polldisaptcher.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/polldisaptcher.c.i
+.PHONY : src/polldisaptcher.c.i
+
+src/polldisaptcher.s: src/polldisaptcher.c.s
+.PHONY : src/polldisaptcher.s
+
+# target to generate assembly for a file
+src/polldisaptcher.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/polldisaptcher.c.s
+.PHONY : src/polldisaptcher.c.s
+
+src/selectdisaptcher.o: src/selectdisaptcher.c.o
+.PHONY : src/selectdisaptcher.o
+
+# target to build an object file
+src/selectdisaptcher.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/selectdisaptcher.c.o
+.PHONY : src/selectdisaptcher.c.o
+
+src/selectdisaptcher.i: src/selectdisaptcher.c.i
+.PHONY : src/selectdisaptcher.i
+
+# target to preprocess a source file
+src/selectdisaptcher.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/selectdisaptcher.c.i
+.PHONY : src/selectdisaptcher.c.i
+
+src/selectdisaptcher.s: src/selectdisaptcher.c.s
+.PHONY : src/selectdisaptcher.s
+
+# target to generate assembly for a file
+src/selectdisaptcher.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/selectdisaptcher.c.s
+.PHONY : src/selectdisaptcher.c.s
+
 src/server.o: src/server.cpp.o
 .PHONY : src/server.o
 
@@ -177,6 +369,102 @@ src/server.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/server.cpp.s
 .PHONY : src/server.cpp.s
 
+src/tcpconnection.o: src/tcpconnection.c.o
+.PHONY : src/tcpconnection.o
+
+# target to build an object file
+src/tcpconnection.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/tcpconnection.c.o
+.PHONY : src/tcpconnection.c.o
+
+src/tcpconnection.i: src/tcpconnection.c.i
+.PHONY : src/tcpconnection.i
+
+# target to preprocess a source file
+src/tcpconnection.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/tcpconnection.c.i
+.PHONY : src/tcpconnection.c.i
+
+src/tcpconnection.s: src/tcpconnection.c.s
+.PHONY : src/tcpconnection.s
+
+# target to generate assembly for a file
+src/tcpconnection.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/tcpconnection.c.s
+.PHONY : src/tcpconnection.c.s
+
+src/tcpserver.o: src/tcpserver.c.o
+.PHONY : src/tcpserver.o
+
+# target to build an object file
+src/tcpserver.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/tcpserver.c.o
+.PHONY : src/tcpserver.c.o
+
+src/tcpserver.i: src/tcpserver.c.i
+.PHONY : src/tcpserver.i
+
+# target to preprocess a source file
+src/tcpserver.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/tcpserver.c.i
+.PHONY : src/tcpserver.c.i
+
+src/tcpserver.s: src/tcpserver.c.s
+.PHONY : src/tcpserver.s
+
+# target to generate assembly for a file
+src/tcpserver.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/tcpserver.c.s
+.PHONY : src/tcpserver.c.s
+
+src/threadpool.o: src/threadpool.c.o
+.PHONY : src/threadpool.o
+
+# target to build an object file
+src/threadpool.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/threadpool.c.o
+.PHONY : src/threadpool.c.o
+
+src/threadpool.i: src/threadpool.c.i
+.PHONY : src/threadpool.i
+
+# target to preprocess a source file
+src/threadpool.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/threadpool.c.i
+.PHONY : src/threadpool.c.i
+
+src/threadpool.s: src/threadpool.c.s
+.PHONY : src/threadpool.s
+
+# target to generate assembly for a file
+src/threadpool.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/threadpool.c.s
+.PHONY : src/threadpool.c.s
+
+src/workthread.o: src/workthread.c.o
+.PHONY : src/workthread.o
+
+# target to build an object file
+src/workthread.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/workthread.c.o
+.PHONY : src/workthread.c.o
+
+src/workthread.i: src/workthread.c.i
+.PHONY : src/workthread.i
+
+# target to preprocess a source file
+src/workthread.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/workthread.c.i
+.PHONY : src/workthread.c.i
+
+src/workthread.s: src/workthread.c.s
+.PHONY : src/workthread.s
+
+# target to generate assembly for a file
+src/workthread.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyApp.dir/build.make CMakeFiles/MyApp.dir/src/workthread.c.s
+.PHONY : src/workthread.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -189,9 +477,45 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/buffer.o"
+	@echo "... src/buffer.i"
+	@echo "... src/buffer.s"
+	@echo "... src/channel.o"
+	@echo "... src/channel.i"
+	@echo "... src/channel.s"
+	@echo "... src/channelmap.o"
+	@echo "... src/channelmap.i"
+	@echo "... src/channelmap.s"
+	@echo "... src/epolldisaptcher.o"
+	@echo "... src/epolldisaptcher.i"
+	@echo "... src/epolldisaptcher.s"
+	@echo "... src/eventloop.o"
+	@echo "... src/eventloop.i"
+	@echo "... src/eventloop.s"
+	@echo "... src/httprequest.o"
+	@echo "... src/httprequest.i"
+	@echo "... src/httprequest.s"
+	@echo "... src/polldisaptcher.o"
+	@echo "... src/polldisaptcher.i"
+	@echo "... src/polldisaptcher.s"
+	@echo "... src/selectdisaptcher.o"
+	@echo "... src/selectdisaptcher.i"
+	@echo "... src/selectdisaptcher.s"
 	@echo "... src/server.o"
 	@echo "... src/server.i"
 	@echo "... src/server.s"
+	@echo "... src/tcpconnection.o"
+	@echo "... src/tcpconnection.i"
+	@echo "... src/tcpconnection.s"
+	@echo "... src/tcpserver.o"
+	@echo "... src/tcpserver.i"
+	@echo "... src/tcpserver.s"
+	@echo "... src/threadpool.o"
+	@echo "... src/threadpool.i"
+	@echo "... src/threadpool.s"
+	@echo "... src/workthread.o"
+	@echo "... src/workthread.i"
+	@echo "... src/workthread.s"
 .PHONY : help
 
 

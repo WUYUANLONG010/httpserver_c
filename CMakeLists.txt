@@ -8,8 +8,10 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS True)
  
 # 收集所有源文件（推荐显式列出或使用更精确的GLOB）
 file(GLOB SOURCES 
-    "src/*.cpp"    # 非递归收集src下的.cpp文件
-    "*.cpp"        # 当前目录下的.cpp文件
+    "src/*.c"    # 非递归收集src下的.cpp文件
+    "*.c"        # 当前目录下的.cpp文件
+    "src/*.cpp"
+    "main.cpp"
 )
  
 # 先创建目标

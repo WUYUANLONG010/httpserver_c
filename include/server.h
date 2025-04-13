@@ -15,11 +15,11 @@ int recvHttpRequest(int cfd,int epfd);
 //解析请求行
 int parseRequestLine(const char* line,int cfd);
 //发送文件
-int sendFile(const char* fileName,int cfd);
-int sendHeadMsg(int cfd,int status,const char* descr,const char* type,int length);
-void decodeMsg(char* to, char* from);
-const char* getFileType(const char* name);
-int sendDir(const char* dirname,int cfd);
-int hexToDec(char c);
+// int sendFile(const char* fileName,int cfd);
+// int sendHeadMsg(int cfd,int status,const char* descr,const char* type,int length);
+// void decodeMsg(char* to, char* from);
+// const char* getFileType(const char* name);
+// int sendDir(const char* dirname,int cfd);
+// int hexToDec(char c);
 
 #endif

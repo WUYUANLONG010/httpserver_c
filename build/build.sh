@@ -20,7 +20,8 @@ cmake "$PROJECT_DIR"
  
 # 编译项目
 make clean
-make
+make -s
+
  
 # 可选：运行生成的可执行文件（假设名称为 MyExecutable）
 #./MyExecutable
