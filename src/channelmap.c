@@ -5,7 +5,7 @@
 struct ChannelMap *channel_map_init(int size) {
     struct ChannelMap *ch_map = (struct ChannelMap *)malloc(sizeof(struct ChannelMap));
     ch_map->size              = size;
-    ch_map->list              = (struct ChannelMap **)malloc(size * sizeof(struct ChannelMap *)); // 为二级指针开辟存储区域
+    ch_map->list              = (struct Channel **)malloc(size * sizeof(struct Channel *)); // 为二级指针开辟存储区域
     return ch_map;
 }
 void channel_map_clean(struct ChannelMap *map) {

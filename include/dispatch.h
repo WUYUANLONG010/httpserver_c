@@ -2,6 +2,7 @@
 #include "channel.h"
 #include <stdbool.h>
 #include "eventloop.h"
+struct EventLoop;
 struct Dispather
 {
     //init 初始化epoll （epoll event） poll:pollfd select:fdset其中一个,返回值是epoll poll select中的一个
@@ -17,8 +18,3 @@ struct Dispather
     //清除数据  关闭fd 释放内存
     int (*clear)(struct EventLoop* evloop);
 };
-// struct EpollData
-// {
-//     int epfd;
-//     struct epoll_event* events;
-// };

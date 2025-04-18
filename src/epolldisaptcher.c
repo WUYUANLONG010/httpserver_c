@@ -1,5 +1,6 @@
 #include "dispatch.h"
 #include <sys/epoll.h>
+#include <unistd.h>
 #include "eventloop.h"
 #include "server.h"
 #include "channel.h"

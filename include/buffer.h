@@ -24,3 +24,4 @@ int buffer_append_string(struct Buffer *buff, const char *data);
 int buffer_socket_read(struct Buffer *buff, int fd);
 // 根据/r/n来取出一行，找到其在buffer中的位置
 char *buffer_find_CRLF(struct Buffer *buff);
+int buffer_socket_send(struct Buffer *buff, int fd);

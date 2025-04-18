@@ -14,6 +14,7 @@ struct ChannelElement {
     struct Channel *ch;
     struct ChannelElement *next;
 };
+struct Dispather;
 struct EventLoop {
     bool is_quit;
     struct Dispather *dpt;

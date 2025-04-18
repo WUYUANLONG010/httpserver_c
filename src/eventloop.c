@@ -25,17 +25,21 @@ struct EventLoop *eventloop_ex_init(const char *theadName) {
     evloop->thread_ID        = pthread_self();
     pthread_mutex_init(&evloop->mutex, NULL);
     strcpy(evloop->threadName, theadName == NULL ? "main" : theadName);
-    evloop->dpt      = &epoll_dispather;
+    evloop->dpt = &epoll_dispather;
+    DEBUG("epoll_dispather ");
     evloop->dpt_data = evloop->dpt->init();  // epoll dispather初始化函数
     evloop->head     = NULL;
     evloop->tail     = NULL;
+    evloop->ch_map=channel_map_init(128);
     int ret          = socketpair(AF_UNIX, SOCK_STREAM, 0, evloop->socket_pair);
 
     if (ret == -1) {
         DEBUG("socket pair create fail");
     }
-    struct Channel *ch = channel_init(evloop->socket_pair[1], read_event, read_local_message, NULL, evloop);
+    struct Channel *ch = channel_init(evloop->socket_pair[1], read_event, read_local_message, NULL, NULL, evloop);
+    DEBUG("eventloop init ->channel_init ");
     event_add_task(evloop, ch, ADD);
+    DEBUG("eventloop init->add task init ");
     return evloop;
 }
 
@@ -76,6 +80,7 @@ void task_wake_up(struct EventLoop *evloop) {
 int event_add_task(struct EventLoop *evloop, struct Channel *ch, int type) {
     // 任务队列加锁，防止子线程访问
     pthread_mutex_lock(&evloop->mutex);
+    DEBUG("Eventloop 添加任务");
     // 创建新的节点
     struct ChannelElement *node = (struct ChannelElement *)malloc(sizeof(struct ChannelElement));
     node->ch                    = ch;
@@ -98,24 +103,30 @@ int event_add_task(struct EventLoop *evloop, struct Channel *ch, int type) {
     */
     if (evloop->thread_ID == pthread_self()) {
         // 当前子线程给自己添加文件描述符
+        DEBUG("eventloop_process_task");
         eventloop_process_task(evloop);
+        // DEBUG("eventloop_process_task end");
     } else {
         // 主线程给子线程添加文件描述符  1.子线程在工作 2.子线程由于epoll等处于阻塞状态
         // 超时时间2s，不可能等阻塞完再给他添加文件描述符
         // 因此做一个操作，如何主动让子线程结束阻塞状态  1.给子线程添加一个channel，不属于连接，专属于用于结束阻塞状态，
         // 在插入任务的同时主动给channel一个读事件
         // 实现方式 1.pipe通信  2.socket pair通信
+        DEBUG("task_wake_up");
         task_wake_up(evloop);
+        // DEBUG("task_wake_up end");
     }
-
+    // DEBUG("return ");
     // 主线程
     return 0;
 }
 // 任务队列处理任务
 int eventloop_process_task(struct EventLoop *evloop) {
+    // DEBUG("eventloop_process_task beging");
     pthread_mutex_lock(&evloop->mutex);
     // 取出头节点
     struct ChannelElement *head = evloop->head;
+    // DEBUG("取出头节点开始");
     while (head != NULL) {
         struct Channel *ch = head->ch;
         if (head->type == ADD) {
@@ -132,28 +143,36 @@ int eventloop_process_task(struct EventLoop *evloop) {
         head                       = head->next;
         free(tmp);
     }
+    //  DEBUG("取出头节点结束");
     evloop->head = evloop->tail = NULL;
 
     pthread_mutex_unlock(&evloop->mutex);
+    // DEBUG("eventloop_process_task end");
     return 0;
 }
 
 int eventloop_add(struct EventLoop *evloop, struct Channel *ch) {
     int fd                    = ch->fd;
     struct ChannelMap *ch_map = evloop->ch_map;
+    DEBUG("eventloop add beging");
+    DEBUG("ch_map size:%d",ch_map->size);
     if (fd >= ch_map->size) {
+        DEBUG("add beging 2");
         if (!make_map_rom(ch_map, fd, sizeof(struct Channel *))) {
             return -1;
         }
     }
     // 找到fd对应的数组元素位置并存储
+    DEBUG("eventloop add beging");
     if (ch_map->list[fd] == NULL) {
         ch_map->list[fd] = ch;
-        evloop->dpt->add(ch, evloop);  // 核心代码  对应的dispatch添加节点
+        evloop->dpt->add(ch, evloop); // 核心代码  对应的dispatch添加节点
+         DEBUG("add success");
     }
     return 0;
 }
 int eventloop_del(struct EventLoop *evloop, struct Channel *ch) {
+    DEBUG("eventloop del beging");
     int fd                    = ch->fd;
     struct ChannelMap *ch_map = evloop->ch_map;
     if (fd >= ch_map->size) {  // fd不在dispatch检测集合里面
@@ -161,9 +180,11 @@ int eventloop_del(struct EventLoop *evloop, struct Channel *ch) {
     }
     // 找到fd对应的数组元素位置并存储
     int ret = evloop->dpt->remove(ch, evloop);
+    DEBUG("eventloop del success");
     return ret;
 }
 int eventloop_mod(struct EventLoop *evloop, struct Channel *ch) {
+    DEBUG("mod beging");
     int fd                    = ch->fd;
     struct ChannelMap *ch_map = evloop->ch_map;
     if (fd >= ch_map->size) {  // fd不在dispatch检测集合里面
@@ -171,6 +192,7 @@ int eventloop_mod(struct EventLoop *evloop, struct Channel *ch) {
     }
     // 找到fd对应的数组元素位置并存储
     int ret = evloop->dpt->modify(ch, evloop);
+    DEBUG("mod end");
     return ret;
 }
 

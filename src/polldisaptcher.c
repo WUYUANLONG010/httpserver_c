@@ -97,7 +97,8 @@ static int poll_remove(struct Channel* ch,struct EventLoop* evloop){
         }
         //超过max，不做操作
     }
-    if(i>=MAX_POLL){
+    ch->destroy_call_back(ch->arg);
+    if (i >= MAX_POLL) {
         return -1;
     }
 }

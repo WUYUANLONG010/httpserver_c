@@ -2,6 +2,7 @@
 #include <pthread.h>
 #include <stdio.h>
 #include "eventloop.h"
+#include "server.h"
 int work_thread_init(struct WorkThread* work_thread,int index){
     //index用来起名字 workthread是一个内存
     work_thread->evloop=NULL;
@@ -9,10 +10,10 @@ int work_thread_init(struct WorkThread* work_thread,int index){
     sprintf(work_thread->name,"Subthread id:%d",index);
     pthread_mutex_init(&work_thread->mutex,NULL);
     pthread_cond_init(&work_thread->cond,NULL);
-    
+    DEBUG("work_thread_init success");
     return 0;
 }
-void subthread_run(void* arg){
+void* subthread_run(void* arg){
     struct WorkThread* work_thread=(struct WorkThread*)arg;
     pthread_mutex_lock(&work_thread->mutex);
     work_thread->evloop=eventloop_ex_init(work_thread->name);   
